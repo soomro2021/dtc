@@ -1,15 +1,19 @@
 <?php
-/*
-Plugin Name: Simple Alert
-Plugin URI: https://example.com/
-Description:
-Version: 1.0
-Author: zafar
-Author URI:
-License: GPLv2 or later
-Text Domain: smpaltr
+/**
+ * Plugin Name: Simple Alert
+ * Plugin URI: https://example.com/
+ * Description: Plugin Description
+ * Version: 1.0
+ * Author: zafar iqbal
+ * Author URI:
+ * License: GPLv2 or later
+ * Text Domain: smpaltr
  */
 
+
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+}
 /**
  * Add to menu
  */

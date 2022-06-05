@@ -19,7 +19,8 @@ wp-config.php
 # Example plugin
 /wp-content/plugins/hello.php
 /wp-content/plugins/akismet/
-/wp-content/plugins/fakerpress
+/wp-content/plugins/fakerpress/
+/wp-content/plugins/contact-form-7/
 # Uploads
 /wp-content/uploads/
 
