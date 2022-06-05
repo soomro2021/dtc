@@ -1,0 +1,132 @@
+.notification-top-bar {
+    position: relative;
+
+    height: 40px;
+    line-height: 40px;
+    width: 100%;
+    background: #1ABC9C;
+    text-align: center;
+    color: #FFFFFF;
+    font-family: sans-serif;
+    font-weight: lighter;
+    font-size: 14px;
+    visibility: hidden;
+    opacity: 0;
+  
+    transition: visibility 0s linear 0.33s, opacity 0.33s linear;
+  }
+  .notification-top-bar.show {
+    visibility: visible;
+    opacity: 1;
+    
+    transition-delay: 0s;
+  }
+
+
+  .notification-top-bar p {
+    padding: 0;
+    margin: 0;
+  }
+  .notification-top-bar p a {
+    padding: 5px 10px;
+    border-radius: 3px;
+    background: #FFF;
+    color: #1ABC9C;
+    font-weight: bold;
+    text-decoration: none;
+  }
+  .msg{
+     display:inline-block;
+  }
+  .loading {
+  /*     position: absolute;
+      left: 0;
+      right: 0;
+      top: 50%; */
+    display:inline-block;
+      width: 100px;
+      color: #FFF;
+  
+  }
+  .loading span {
+      position: absolute;
+      height: 10px;
+      width: 84px;
+      top: 18px;
+      overflow: hidden;
+  }
+  .loading span > i {
+      position: absolute;
+      height: 4px;
+      width: 4px;
+      border-radius: 50%;
+      -webkit-animation: wait 4s infinite;
+      -moz-animation: wait 4s infinite;
+      -o-animation: wait 4s infinite;
+      animation: wait 4s infinite;
+  }
+  .loading span > i:nth-of-type(1) {
+      left: -28px;
+      background: #fff;
+  }
+  .loading span > i:nth-of-type(2) {
+      left: -21px;
+      -webkit-animation-delay: 0.8s;
+      animation-delay: 0.8s;
+      background: lightgreen;
+  }
+  
+  @-webkit-keyframes wait {
+      0%   { left: -7px  }
+      30%  { left: 52px  }
+      60%  { left: 22px  }
+      100% { left: 100px }
+  }
+  @-moz-keyframes wait {
+      0%   { left: -7px  }
+      30%  { left: 52px  }
+      60%  { left: 22px  }
+      100% { left: 100px }
+  }
+  @-o-keyframes wait {
+      0%   { left: -7px  }
+      30%  { left: 52px  }
+      60%  { left: 22px  }
+      100% { left: 100px }
+  }
+  @keyframes wait {
+      0%   { left: -7px  }
+      30%  { left: 52px  }
+      60%  { left: 22px  }
+      100% { left: 100px }
+  }
+
+
+
+a.swatch.active:after {
+    content: " ";
+}
+a.swatch:after {
+    border: solid #fff;
+    position: absolute;
+    -webkit-transform: rotate(-45deg);
+    transform: rotate(-45deg);
+    border-width: 0 0 3px 3px !important;
+    height: 9px;
+    width: 16px;
+    margin: 12px 0 0 0px;
+}
+a.swatch[data-filter-value=Green] {
+    background-color: #7bba3c;
+}
+
+a.swatch {
+    position: relative;
+    margin: 0 5px;
+    width: 20px;
+    height: 20px;
+    border-radius: 50px;
+}
+.border-secondary {
+    border-color: #ddd!important;
+}
