@@ -286,7 +286,7 @@ function simple_alert_script_footer( $alert_message ) {
 function simple_alert_message() {
 	global $post;
 	$options = get_option( 'simple-alert-posts' );
-	if ( get_post_meta( $post->ID, '_simple_alert', 1 ) == 1 and $options['alert_message'] != '' ) {
+	if ( get_post_meta( $post->ID, '_simple_alert', 1 ) == 1 and $options['alert_message'] != '' and !is_home() ) {
 		simple_alert_script_footer( $options['alert_message'] );
 	}
 }
