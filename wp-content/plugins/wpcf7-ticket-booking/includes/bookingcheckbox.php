@@ -56,14 +56,16 @@ function cf7tb_ticket_form_tag_handler( $tag ) {
 	$rows = $wpdb->get_results( 'SELECT * FROM ' . $wpdb->prefix . 'cf7booking' );
 	foreach ( $rows as $row ) {
 		$atts['name']  = $tag->name . "[$row->id]";
-		$atts['value'] = 1;
+		$atts['value'] = $row->status;
 		if ( $row->status == 1 ) {
 			$atts['disabled'] = 'disabled';
+		}else{
+			unset($atts['disabled']);
 		}
 		$html .= sprintf(
 			'<br>
-
-			<span class="wpcf7-form-control-wrap %1$s"><input %2$s />%3$s</span> <label>%4$s</label>',
+<label>
+			<span class="wpcf7-form-control-wrap %1$s"><input %2$s />%3$s</span> %4$s</label>',
 			sanitize_html_class( $tag->name ),
 			wpcf7_format_atts( $atts ),
 			$validation_error,
@@ -164,17 +166,32 @@ function tbcf_tag_generator_ticket_book_cf7( $contact_form, $args = '' ) {
 }
 
 
-function action_wpcf7_posted_data( $array ) {
-	foreach ( $array as $key => $value ) {
+function action_wpcf7_posted_data( $array ) { 
+global $wpdb;
 
-		if ( str_starts_with( $key, 'ticket_book_cf7' ) ) {
+$table_name  = $wpdb->prefix."cf7booking";
+	foreach ($array as $key => $value) {
 
-			foreach ( $array[ $key ] as $subkey => $subvalue ) {
-				$array[ $key ][ $subkey ] = 'Ticket No.' . $subvalue . "\r\n";
+		if (str_starts_with($key, 'ticket_book_cf7')) {
+			
+			foreach($array[$key] as $subkey => $subvalue ){
+			
+
+				$id = array('id' => $subkey);
+				$subs = array(
+					'status' => 1,
+					'booking_time'=> current_time( 'mysql' )
+			);				
+				$wpdb->update($table_name, $subs, $id);
+				$array[$key][$subkey] = "Ticket No.".$subkey."\r\n";
 			}
-		}
+		} 
 	}
 
-	return $array;
+
+
+    return $array;
 }
 add_filter( 'wpcf7_posted_data', 'action_wpcf7_posted_data', 10, 1 );
+
+

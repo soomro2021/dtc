@@ -56,7 +56,6 @@ class CF7_Ticket_Booking{
 		$sql = "CREATE TABLE `$table_name` (
 		`id` int(11) NOT NULL,
 		`status` int(11) DEFAULT '0',
-		`user` varchar(220) DEFAULT NULL,
 		`booking_time` datetime DEFAULT '0000-00-00 00:00:00' NOT NULL,
 	  
 		PRIMARY KEY(id)
