@@ -4,9 +4,11 @@
  * * A base module for [ticketbooking] and [ticketbooking*]
  **/
 
-/* form_tag handler */
-add_action( 'wpcf7_init', 'tbcf_add_form_tag_ticket_book_cf7' );
 
+add_action( 'wpcf7_init', 'tbcf_add_form_tag_ticket_book_cf7' );
+/**
+ * Ticket booking init
+ */
 function tbcf_add_form_tag_ticket_book_cf7() {
 	wpcf7_add_form_tag(
 		array( 'ticket_book_cf7', 'ticket_book_cf7*' ),
@@ -14,7 +16,9 @@ function tbcf_add_form_tag_ticket_book_cf7() {
 		array( 'name-attr' => true )
 	);
 }
-
+/**
+ * Ticket booking tag handler
+ */
 function cf7tb_ticket_form_tag_handler( $tag ) {
 	global $wpdb;
 	if ( empty( $tag->name ) ) {
@@ -59,8 +63,8 @@ function cf7tb_ticket_form_tag_handler( $tag ) {
 		$atts['value'] = $row->status;
 		if ( $row->status == 1 ) {
 			$atts['disabled'] = 'disabled';
-		}else{
-			unset($atts['disabled']);
+		} else {
+			unset( $atts['disabled'] );
 		}
 		$html .= sprintf(
 			'<br>
@@ -79,7 +83,10 @@ function cf7tb_ticket_form_tag_handler( $tag ) {
 
 add_filter( 'wpcf7_validate_ticket_book_cf7', 'tbcf_ticket_book_cf7_validation_filter', 10, 2 );
 add_filter( 'wpcf7_validate_ticket_book_cf7*', 'tbcf_ticket_book_cf7_validation_filter', 10, 2 );
-/* Validation filter */
+
+/**
+ * Ticket booking Validation filter
+ */
 function tbcf_ticket_book_cf7_validation_filter( $result, $tag ) {
 	$type = $tag->type;
 	$name = $tag->name;
@@ -96,7 +103,10 @@ function tbcf_ticket_book_cf7_validation_filter( $result, $tag ) {
 
 
 add_action( 'wpcf7_admin_init', 'tbcf_add_tag_generator_ticket_book_cf7', 20 );
-/* Tag generator */
+
+/**
+ * Ticket booking Tag generator
+ */
 function tbcf_add_tag_generator_ticket_book_cf7() {
 	 $tag_generator = WPCF7_TagGenerator::get_instance();
 	$tag_generator->add(
@@ -105,7 +115,10 @@ function tbcf_add_tag_generator_ticket_book_cf7() {
 		'tbcf_tag_generator_ticket_book_cf7'
 	);
 }
-/* Tag generator hander */
+
+/**
+ * Ticket booking Tag generator hander
+ */
 function tbcf_tag_generator_ticket_book_cf7( $contact_form, $args = '' ) {
 	$args = wp_parse_args( $args, array() );
 	$type = 'ticket_book_cf7';
@@ -165,33 +178,30 @@ function tbcf_tag_generator_ticket_book_cf7( $contact_form, $args = '' ) {
 	<?php
 }
 
+/**
+ * Ticket booking update Ticket status and message on email
+ */
+function action_wpcf7_posted_data( $array ) {
+	global $wpdb;
 
-function action_wpcf7_posted_data( $array ) { 
-global $wpdb;
+	$table_name = $wpdb->prefix . 'cf7booking';
+	foreach ( $array as $key => $value ) {
 
-$table_name  = $wpdb->prefix."cf7booking";
-	foreach ($array as $key => $value) {
+		if ( str_starts_with( $key, 'ticket_book_cf7' ) ) {
 
-		if (str_starts_with($key, 'ticket_book_cf7')) {
-			
-			foreach($array[$key] as $subkey => $subvalue ){
-			
+			foreach ( $array[ $key ] as $subkey => $subvalue ) {
 
-				$id = array('id' => $subkey);
+				$id   = array( 'id' => $subkey );
 				$subs = array(
-					'status' => 1,
-					'booking_time'=> current_time( 'mysql' )
-			);				
-				$wpdb->update($table_name, $subs, $id);
-				$array[$key][$subkey] = "Ticket No.".$subkey."\r\n";
+					'status'       => 1,
+					'booking_time' => current_time( 'mysql' ),
+				);
+				$wpdb->update( $table_name, $subs, $id );
+				$array[ $key ][ $subkey ] = 'Ticket No.' . $subkey . "\r\n";
 			}
-		} 
+		}
 	}
 
-
-
-    return $array;
+	return $array;
 }
 add_filter( 'wpcf7_posted_data', 'action_wpcf7_posted_data', 10, 1 );
-
-
