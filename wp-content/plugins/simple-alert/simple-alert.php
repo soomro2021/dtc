@@ -1,8 +1,9 @@
 <?php
+
 /**
  * Plugin Name: Simple Alert
- * Plugin URI: https://example.com/
- * Description: Plugin Description
+ * Plugin URI: https://qasimabadmart.com/
+ * Description: Alert box will be displayed as alert on front side on post type and custom post type as per select on setting page
  * Version: 1.0
  * Author: zafar iqbal
  * Author URI:
@@ -24,7 +25,9 @@ function simple_alert_register_options_page() {
 add_action( 'admin_menu', 'simple_alert_register_options_page' );
 
 add_action( 'wp_ajax_simple_alert_get_post_data', 'get_alert_data_ajax_handler' );
-
+/**
+ * ajax handler update status
+ */
 function get_alert_data_ajax_handler() {
 	$post_types                            = $_POST['type'];
 	$options                               = get_option( 'simple-alert-posts' );
@@ -34,6 +37,10 @@ function get_alert_data_ajax_handler() {
 	// wp_send_json_success($results);
 	wp_die();
 }
+
+/**
+ * rander posts checkbox
+ */
 
 function rander_posts_checkbox( $post_types ) {
 	 global $wpdb;
@@ -63,7 +70,9 @@ function rander_posts_checkbox( $post_types ) {
 }
 
 add_action( 'wp_ajax_simple_alert_remove_post_data', 'remove_alert_data_ajax_handler' );
-
+/**
+ * data ajax handle
+ */
 function remove_alert_data_ajax_handler() {
 	 global $wpdb;
 	$post_types                            = $_POST['type'];
@@ -71,7 +80,9 @@ function remove_alert_data_ajax_handler() {
 	$options['posts_types'][ $post_types ] = 0;
 	update_option( 'simple-alert-posts', $options );
 }
-
+/**
+ * update alert
+ */
 function update_alert_data_ajax_handler() {
 	 $pid  = $_POST['post_id'];
 	$value = $_POST['value'];
@@ -81,7 +92,9 @@ function update_alert_data_ajax_handler() {
 }
 add_action( 'wp_ajax_simple_alert_update_post_data', 'update_alert_data_ajax_handler' );
 
-
+/**
+ * alert save
+ */
 function simple_alert_save_ajax_handler() {
 	 $alert_message           = $_POST['alert_message'];
 	$options                  = get_option( 'simple-alert-posts' );
@@ -210,6 +223,9 @@ function simple_alert_options_page() {
 	<?php
 }
 
+/**
+ * Loads scripts for front
+ */
 function simple_alert_font_assets() {
 	$custom_js_path = plugins_url( 'simple-alert/lib/assets/js/simple-alert.js' );
 
@@ -220,7 +236,9 @@ function simple_alert_font_assets() {
 }
 
 add_action( 'wp_enqueue_scripts', 'simple_alert_font_assets' );
-
+/**
+ * alart box code
+ */
 function simple_alert_script_footer( $alert_message ) {
 	?>
 
@@ -262,7 +280,9 @@ function simple_alert_script_footer( $alert_message ) {
 
 	<?php
 }
-
+/**
+ * check condiction for alert box
+ */
 function simple_alert_message() {
 	global $post;
 	$options = get_option( 'simple-alert-posts' );
