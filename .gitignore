@@ -1,4 +1,4 @@
-/.vscode2/
+/.vscode/
 /wp-admin/
 /wp-content/index.php
 /wp-content/languages
@@ -32,3 +32,4 @@ wp-config.php
 # htaccess
 /.htaccess
 wp-content/plugins/wpcf7-ticket-booking.zip
+wp-content/plugins.zip
