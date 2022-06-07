@@ -21,6 +21,7 @@ wp-config.php
 /wp-content/plugins/akismet/
 /wp-content/plugins/fakerpress/
 /wp-content/plugins/contact-form-7/
+/wp-content/plugins/country-phone-field-contact-form-7/
 # Uploads
 /wp-content/uploads/
 
@@ -29,3 +30,4 @@ wp-config.php
 
 # htaccess
 /.htaccess
+wp-content/plugins/wpcf7-ticket-booking.zip
