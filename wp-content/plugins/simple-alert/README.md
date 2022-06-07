@@ -22,7 +22,7 @@ https://qasimabadmart.com/wp-admin/options-general.php?page=simple-alert
 
 ## Screenshots
 
-![App Screenshot](https://pasteboard.co/l8nA5wzckx5Y.png)
-![App Screenshot](https://pasteboard.co/PTWV2EklQ8oH.png)
+![App Screenshot](Screenshot_2.png)
+![App Screenshot](Screenshot_1.png)
 
 
